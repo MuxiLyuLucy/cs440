@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Five-in-a-Row</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="homepage">
+        <div id="aside">
+            <div id="title">Five-in-a-Row</div>
+            <button id="start_local" class="text">Start Locally</button>
+            <br/>
+            <button id="start_player" class="text">Start with Player</button>
+            <br/>
+            <button id="start_ai" class="text">Start with AI</button>
+        </div>
+    </div>
+
+    <div id="gamepage">
+        <div id="aside">
+            <div id="title">Five-in-a-Row</div>
+            <div id="message" class="text">Waiting for the other player to join...</div>
+            <button class="text" id="exit">Return to Homepage</button>   
+        </div>
+        <canvas id="board"></canvas>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

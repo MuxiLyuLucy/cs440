@@ -1,0 +1,25 @@
+#aside {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+  min-width: fit-content;
+  padding: 1rem 1rem;
+}
+
+#title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.text {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+#return:hover {
+  cursor: pointer;
+}
+
+#board {
+  border: 1px solid black;
+}
