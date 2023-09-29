@@ -8,6 +8,11 @@
  
     <script>
       function startTimer(seconds) {
+        if (seconds == "-1") {
+          window.confirm("Invalid timer value.");
+          window.history.back();
+          return;
+        }
         seconds = parseInt(seconds) || 3;
         setTimeout(function() { 
           window.confirm("Time is up!");
