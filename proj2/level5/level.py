@@ -7,10 +7,16 @@ def welcome():
     return render_template("welcome.html")
 
 def signup():
+    next_url = request.args.get('next')
+    if next_url != "confirm":
+        return render_template("signup.html", next="confirm")
     return render_template("signup.html", next=request.args.get('next'))
 
 def confirm():
-    return render_template("confirm.html", next=request.args.get('next', 'welcome'))
+    next_url = request.args.get('next')
+    if next_url != "welcome":
+        return render_template("confirm.html", next="welcome")
+    return render_template("confirm.html", next=request.args.get('next'))
 
 @app.route("/")
 def index():
