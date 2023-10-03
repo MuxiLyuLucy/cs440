@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'nonce-2333'; script-src 'nonce-2333'">
+    <title>Level 5</title>
+    <!-- Internal game scripts/styles, mostly boring stuff -->
+    <script src="https://xss-game.appspot.com/static/game-frame.js" nonce="2333"></script>
+    <link rel="stylesheet" href="https://xss-game.appspot.com/static/game-frame-styles.css" nonce="2333">      
+  </head>
+    
+    <body id="level5">
+    <img src="{{url_for('static', filename='level5.png')}}">
+    <br><br>
+    <!-- We're ignoring the email, but the poor user will never know! -->
+    Enter email: <input id="reader-email" name="email" value="">
+
+    <br><br>
+    <a href="{{ next }}">Next >></a>
+    </body>
+</html>

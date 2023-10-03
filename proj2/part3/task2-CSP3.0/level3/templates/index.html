@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Level 3</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'nonce-2333'; script-src 'nonce-2333'">
+    <!-- Internal game scripts/styles, mostly boring stuff -->
+    <script src="https://xss-game.appspot.com/static/game-frame.js" nonce="2333"></script>
+    <link rel="stylesheet" href="https://xss-game.appspot.com/static/game-frame-styles.css" nonce="2333"/>
+ 
+    <!-- Load jQuery -->
+    <script nonce="2333"
+      src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+ 
+    <script nonce="2333">
+      function chooseTab(num) {
+        // Dynamically load the appropriate image.
+        let index = parseInt(num);
+        var html = "Image " + index + "<br>";
+        html += "<img src='../static/cloud" + index + ".jpg' />";
+        $('#tabContent').html(html);
+ 
+        window.location.hash = num;
+ 
+        // Select the current tab
+        var tabs = document.querySelectorAll('.tab');
+        for (var i = 0; i < tabs.length; i++) {
+          if (tabs[i].id == "tab" + parseInt(num)) {
+            tabs[i].className = "tab active";
+            } else {
+            tabs[i].className = "tab";
+          }
+        }
+ 
+        // Tell parent we've changed the tab
+        top.postMessage(self.location.toString(), "*");
+      }
+ 
+      window.onload = function() { 
+        chooseTab(unescape(self.location.hash.substr(1)) || "1");
+      }
+ 
+      // Extra code so that we can communicate with the parent page
+      window.addEventListener("message", function(event){
+        if (event.source == parent) {
+          chooseTab(unescape(self.location.hash.substr(1)));
+        }
+      }, false);
+    </script>
+ 
+  </head>
+  <body id="level3">
+    <div id="header">
+      <img id="logo" src="../static/level3.png">
+      <span>Take a tour of our cloud data center.</a>
+    </div>
+ 
+    <div class="tab" id="tab1">Image 1</div>
+    <div class="tab" id="tab2">Image 2</div>
+    <div class="tab" id="tab3">Image 3</div>
+ 
+    <div id="tabContent"> </div>
+  </body>
+
+  <script nonce="2333">
+    document.getElementById("tab1").onclick = function() {
+      chooseTab('1');
+    }
+    document.getElementById("tab2").onclick = function() {
+      chooseTab('2');
+    }
+    document.getElementById("tab3").onclick = function() {
+      chooseTab('3');
+    }
+  </script>
+</html>
