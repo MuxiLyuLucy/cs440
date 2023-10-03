@@ -2,62 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-RANDOM_UNIQUE_NONCE_VALUE'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Level 3</title>
     <!-- Internal game scripts/styles, mostly boring stuff -->
-    <link rel="stylesheet" href="https://xss-game.appspot.com/static/game-frame-styles.css" />
- 
+    <link rel="stylesheet" href="{{ url_for('static', filename='game-frame-styles.css') }}" />
+    <script src="{{ url_for('static', filename='game-frame.js') }}"></script>
     <!-- Load jQuery -->
-    <script
-      src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-    </script>
- 
-    <script>
-      function chooseTab(num) {
-        // Dynamically load the appropriate image.
-        let index = parseInt(num);
-        var html = "Image " + index + "<br>";
-        html += "<img src='https://xss-game.appspot.com/static/level3/cloud" + index + ".jpg' />";
-        $('#tabContent').html(html);
- 
-        window.location.hash = num;
- 
-        // Select the current tab
-        var tabs = document.querySelectorAll('.tab');
-        for (var i = 0; i < tabs.length; i++) {
-          if (tabs[i].id == "tab" + parseInt(num)) {
-            tabs[i].className = "tab active";
-            } else {
-            tabs[i].className = "tab";
-          }
-        }
- 
-        // Tell parent we've changed the tab
-        top.postMessage(self.location.toString(), "*");
-      }
- 
-      window.onload = function() { 
-        chooseTab(unescape(self.location.hash.substr(1)) || "1");
-      }
- 
-      // Extra code so that we can communicate with the parent page
-      window.addEventListener("message", function(event){
-        if (event.source == parent) {
-          chooseTab(unescape(self.location.hash.substr(1)));
-        }
-      }, false);
-    </script>
- 
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
   </head>
+
   <body id="level3">
     <div id="header">
-      <img id="logo" src="https://xss-game.appspot.com/static/logos/level3.png">
+      <img src="{{ url_for('static', filename='level3.png') }}">
       <span>Take a tour of our cloud data center.</a>
     </div>
- 
-    <div class="tab" id="tab1" onclick="chooseTab('1')">Image 1</div>
-    <div class="tab" id="tab2" onclick="chooseTab('2')">Image 2</div>
-    <div class="tab" id="tab3" onclick="chooseTab('3')">Image 3</div>
+    <br>
+    <div class="tab" id="tab1">Image 1</div>
+    <div class="tab" id="tab2">Image 2</div>
+    <div class="tab" id="tab3">Image 3</div>
  
     <div id="tabContent"> </div>
   </body>
