@@ -2,15 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-RANDOM_UNIQUE_NONCE_VALUE'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>Level 5</title>
     <!-- Internal game scripts/styles, mostly boring stuff -->
-    <link rel="stylesheet" href="https://xss-game.appspot.com/static/game-frame-styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='game-frame-styles.css') }}" />
+    <script src="{{ url_for('static', filename='game-frame.js') }}"></script>
   </head>
   
   <body id="level5">
     Welcome! Today we are announcing the much anticipated<br><br>
-    <img src="https://xss-game.appspot.com/static/logos/level5.png" /><br><br>
+    <img src="{{ url_for('static', filename='level5.png') }}"><br><br>
  
     <a href="/signup?next=confirm">Sign up</a> 
     for an exclusive Beta.
