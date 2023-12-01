@@ -1,0 +1,25 @@
+--- ./app.js	2023-09-20 15:33:09.000000000 -0400
++++ ./app-patched.js	2023-10-17 13:53:13.000000000 -0400
+@@ -44,6 +44,22 @@
+ function deepMerge(target, source) {
+     let output = Object.assign({}, target);
+     if (isObject(target) && isObject(source)) {
++        // Remove the __proto__ property from the source object
++        if ("__proto__" in source){
++            delete source["__proto__"]
++        }
++        if ("prototype" in source){
++            delete source["prototype"]
++        }
++        if ("constructor" in source){
++            delete source["constructor"]
++        }
++        if ("hasOwnProperty" in source){
++            delete source["hasOwnProperty"]
++        }
++        if ("propertyIsEnumerable" in source){
++            delete source["propertyIsEnumerable"]
++        }
+         for (let key in source){
+             if(source.hasOwnProperty(key)){
+                 if(isObject(source[key])){

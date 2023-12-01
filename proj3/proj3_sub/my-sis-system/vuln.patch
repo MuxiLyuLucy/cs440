@@ -1,0 +1,16 @@
+--- ./login.js	2023-10-17 14:32:54.000000000 -0400
++++ ./login_patched.js	2023-10-17 14:34:33.000000000 -0400
+@@ -8,8 +8,13 @@
+ /* GET users listing. */
+ router.post('/', function(req, res, next) {
+     try{
++      // approch 1: use ion-parser
++      Object.freeze(Object.getPrototypeOf({}));
+       const userData = ion.parse(req.body);
+ 
++      // approch 2: avoid using ion-parser
++      // const userData = {user: {name: req.body.name, password: req.body.password}};
++
+       if (userData.user.name == "admin" && userData.user.password == "dksjhf2798y8372ghkjfgsd8tg823gkjbfsig7g2gkfjsh"){
+         res.send('Nice Try??')
+       } else{
