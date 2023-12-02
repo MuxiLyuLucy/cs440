@@ -7,11 +7,6 @@ const cors = require('cors');
 const routes = require('./routes.js');
 
 const app = express();
-
-app.use(express.json());
-
-app.use(routes);
-
 const corsOptions = {
   origin: 'http://localhost:3000', // Replace with your frontend URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -19,6 +14,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(express.json());
+app.use(routes);
+
 
 mongoose
   .connect(process.env.MONGODB_URI)

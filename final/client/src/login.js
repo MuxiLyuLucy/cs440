@@ -26,19 +26,21 @@ const Login = (props) => {
             return
         }
 
-        // Check if username has an account associated with it
-        checkAccountExists(username)
-            .then(accountExists => {
-                if (accountExists) {
-                    logIn();
-                } else {
-                    window.alert("An account does not exist with this username address: " + username)
-                }
-            })
-            .catch(error => {
-                console.error('Error checking account:', error);
-                // Handle the error, show a message to the user, or perform other actions
-            });
+        logIn();
+
+        // // Check if username has an account associated with it
+        // checkAccountExists(username)
+        //     .then(accountExists => {
+        //         if (accountExists) {
+        //             logIn();
+        //         } else {
+        //             window.alert("An account does not exist with this username address: " + username)
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Error checking account:', error);
+        //         // Handle the error, show a message to the user, or perform other actions
+        //     });
     }
 
     // Call the server API to check if the given username ID already exists
@@ -75,20 +77,18 @@ const Login = (props) => {
             body: JSON.stringify({ username, password })
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.message === "Invalid username or password") {
+            if (response.status === 403) {
+                window.alert("Possible NoSQL attack detected");
+            } else if (response.status === 404) {
                 window.alert("Invalid username or password");
-            } else {
+            } else if (response.status === 200) {
                 window.alert("Logged in as " + username);
+            } else {
+                window.alert("Something went wrong");
             }
         })
         .catch(error => {
-            window.alert("Failed to log in");
+            window.alert("Something went wrong");
         });
     };
     
